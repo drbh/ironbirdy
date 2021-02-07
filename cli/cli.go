@@ -16,6 +16,8 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+var home string = os.Getenv("HOME")
+
 func calculate(configPath string, tickerSymbol string, expireDateNext string, historyStart string, historyEnd string, minDistanceFromPrice float64) []ironbirdy.IronCondor {
 
 	fmt.Printf("🎬 %s\n", "Starting")
@@ -222,7 +224,7 @@ func main() {
 		},
 	}
 
-	generateBearCallSpreadsCommand.Flags().StringVarP(&configPath, "config", "c", "/Users/drbh/.robintools/config.yml", "path to config file")
+	generateBearCallSpreadsCommand.Flags().StringVarP(&configPath, "config", "c", home + "/.robintools/config.yml", "path to config file")
 	generateBearCallSpreadsCommand.Flags().StringVarP(&tickerSymbol, "ticker", "t", "IWM", "underlying symbol")
 	generateBearCallSpreadsCommand.Flags().StringVarP(&expirationDateNext, "expire", "x", "2021-02-05", "expiration date")
 	generateBearCallSpreadsCommand.Flags().StringVarP(&writeToCSV, "output", "o", "", "write csv [filename]")
@@ -319,7 +321,7 @@ func main() {
 		},
 	}
 
-	generateBullPutSpreadsCommand.Flags().StringVarP(&configPath, "config", "c", "/Users/drbh/.robintools/config.yml", "path to config file")
+	generateBullPutSpreadsCommand.Flags().StringVarP(&configPath, "config", "c", home + "/.robintools/config.yml", "path to config file")
 	generateBullPutSpreadsCommand.Flags().StringVarP(&tickerSymbol, "ticker", "t", "IWM", "underlying symbol")
 	generateBullPutSpreadsCommand.Flags().StringVarP(&expirationDateNext, "expire", "x", "2021-02-05", "expiration date")
 	generateBullPutSpreadsCommand.Flags().StringVarP(&writeToCSV, "output", "o", "", "write csv [filename]")
@@ -382,7 +384,7 @@ and ones that have spread with postive returns and only have a strike difference
 	}
 
 	generateCondorCommand.Flags().StringVarP(&tickerSymbol, "ticker", "t", "IWM", "underlying symbol")
-	generateCondorCommand.Flags().StringVarP(&configPath, "config", "c", "/Users/drbh/.robintools/config.yml", "path to config file")
+	generateCondorCommand.Flags().StringVarP(&configPath, "config", "c", home + "/.robintools/config.yml", "path to config file")
 	generateCondorCommand.Flags().StringVarP(&expirationDateNext, "expire", "x", "2021-02-05", "expiration date")
 	generateCondorCommand.Flags().StringVarP(&historyStart, "start", "s", "1800-01-01", "start date")
 	generateCondorCommand.Flags().StringVarP(&historyEnd, "end", "e", "2021-02-04", "end date")
