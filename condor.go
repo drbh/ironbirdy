@@ -62,21 +62,39 @@ func AdjustRisk(bears []SpreadLeg, bulls []SpreadLeg, hist []DeltaWeeks, minDist
 			below := countBelow(hist, bullPutSpread.ShortDistance)
 			above := countAbove(hist, bearCallSpread.ShortDistance)
 
-			rar := calcAdjusted(
-				below,
-				above,
-				bearCallSpread.PossibleRet,
-				bullPutSpread.PossibleRet,
-				largerSpread,
-				float64(len(hist)),
-			)
+			maxOneSidedRisk := Max(below, above)
+
+			// rarOneSide := calcAdjusted(
+			// 	0,
+			// 	maxOneSidedRisk,
+			// 	bearCallSpread.PossibleRet,
+			// 	bullPutSpread.PossibleRet,
+			// 	largerSpread,
+			// 	float64(len(hist)),
+			// )
+
+			// rar := calcAdjusted(
+			// 	below,
+			// 	above,
+			// 	bearCallSpread.PossibleRet,
+			// 	bullPutSpread.PossibleRet,
+			// 	largerSpread,
+			// 	float64(len(hist)),
+			// )
+
+			ret := (bullPutSpread.PossibleRet + bearCallSpread.PossibleRet) / largerSpread
+
+			rar := -1 + (1-((below+above)/float64(len(hist))))*(1+ret)
+			rarOneSide := -1 + (1-(maxOneSidedRisk/float64(len(hist))))*(1+ret)
+
 			ic := IronCondor{
 				CallLeg:    bearCallSpread,
 				PutLeg:     bullPutSpread,
 				Rar:        rar,
+				Rar1Side:   rarOneSide,
 				Prem:       bullPutSpread.PossibleRet + bearCallSpread.PossibleRet,
 				Collateral: largerSpread,
-				Ret:        (bullPutSpread.PossibleRet + bearCallSpread.PossibleRet) / largerSpread,
+				Ret:        ret,
 
 				CountBelow: below,
 				CountAbove: above,

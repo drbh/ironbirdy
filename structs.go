@@ -52,6 +52,7 @@ type IronCondor struct {
 	CallLeg    SpreadLeg
 	PutLeg     SpreadLeg
 	Rar        float64
+	Rar1Side   float64
 	Prem       float64
 	Collateral float64
 	Ret        float64
