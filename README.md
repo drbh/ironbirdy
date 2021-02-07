@@ -1,6 +1,11 @@
 
 # Iron Birdy
 
+### Single Line Install
+```
+curl -sLJO https://github.com/drbh/ironbirdy/releases/download/origin/ironbirdy --output ironbirdy && chmod +x ironbirdy && ./ironbirdy
+```
+
 <img src="https://media.giphy.com/media/xTka02cClo5HtVqpC8/giphy.gif"/>
 
 
