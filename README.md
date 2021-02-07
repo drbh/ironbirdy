@@ -9,6 +9,31 @@
 This project's api is evolving and may not work as described below. This repo is a location for the code in it's current state.
 
 
+
+### SETTING UP YOUR CONFIG FILE
+
+```
+# make a new folder
+mkdir ~/.robintools
+
+# make a new file
+touch ~/.robintools/config.yml 
+
+# open and edit the file
+open -a TextEdit ~/.robintools/config.yml
+```
+
+Now copy this into the file and update the values to your user/pass
+
+```
+account:
+  email: "MYCOOLEMAIL"
+  password: "MYSUPERSECRETPASSWORD"
+```
+
+
+
+
 ### Bear Call Spreads
 
 ```

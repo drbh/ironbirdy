@@ -116,3 +116,63 @@ func WriteCondorsToFile(condors []IronCondor, name string) {
 		fmt.Fprintf(file, "\n")
 	}
 }
+
+func WriteBullPutsToFile(bullPutSpreads []SpreadLeg, name string) {
+	file, fileErr := os.Create(name)
+	if fileErr != nil {
+		spew.Dump(fileErr)
+	}
+	names := structs.Names(bullPutSpreads[0])
+	for i := 0; i < len(names); i++ {
+		// values[i] = v.Field(i).Interface()
+		fmt.Fprintf(file, "%s", names[i])
+		if i < (len(names) - 1) {
+			fmt.Fprintf(file, ",")
+		}
+	}
+	fmt.Fprintf(file, "\n")
+
+	for i := range bullPutSpreads {
+		k := bullPutSpreads[i]
+		v := reflect.ValueOf(k)
+		// values := make([]interface{}, v.NumField())
+		for i := 0; i < v.NumField(); i++ {
+			// values[i] = v.Field(i).Interface()
+			fmt.Fprintf(file, "%.4f", v.Field(i).Interface())
+			if i < (v.NumField() - 1) {
+				fmt.Fprintf(file, ",")
+			}
+		}
+		fmt.Fprintf(file, "\n")
+	}
+}
+
+func WriteBearCallsToFile(bearCallSpread []SpreadLeg, name string) {
+	file, fileErr := os.Create(name)
+	if fileErr != nil {
+		spew.Dump(fileErr)
+	}
+	names := structs.Names(bearCallSpread[0])
+	for i := 0; i < len(names); i++ {
+		// values[i] = v.Field(i).Interface()
+		fmt.Fprintf(file, "%s", names[i])
+		if i < (len(names) - 1) {
+			fmt.Fprintf(file, ",")
+		}
+	}
+	fmt.Fprintf(file, "\n")
+
+	for i := range bearCallSpread {
+		k := bearCallSpread[i]
+		v := reflect.ValueOf(k)
+		// values := make([]interface{}, v.NumField())
+		for i := 0; i < v.NumField(); i++ {
+			// values[i] = v.Field(i).Interface()
+			fmt.Fprintf(file, "%.4f", v.Field(i).Interface())
+			if i < (v.NumField() - 1) {
+				fmt.Fprintf(file, ",")
+			}
+		}
+		fmt.Fprintf(file, "\n")
+	}
+}

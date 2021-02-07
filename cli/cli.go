@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	// "sort"
 	"strconv"
 	"strings"
 	"time"
@@ -211,6 +212,7 @@ func main() {
 
 			if writeToCSV != "" {
 				fmt.Println("Write To CSV")
+				ironbirdy.WriteBearCallsToFile(bearCallSpread, writeToCSV)
 			} else {
 				spew.Dump(bearCallSpread[0])
 			}
@@ -309,8 +311,10 @@ func main() {
 
 			if writeToCSV != "" {
 				fmt.Println("Write To CSV", writeToCSV)
+				ironbirdy.WriteBullPutsToFile(bullPutSpread, writeToCSV)
 			} else {
 				spew.Dump(bullPutSpread[0])
+				
 			}
 		},
 	}
